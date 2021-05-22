@@ -28,7 +28,7 @@ router.get('/:id', (req, res) => {
                 })
             },
 
-            function findFail(err) {
+            function findFail() {
                 res.status(500).json({
                     message: "Data not found."
                 })
@@ -74,7 +74,7 @@ router.put('/update/:id', (req, res) => {
             }
         })
         .then(
-            function updateSuccess(game) {
+            function updateSuccess() {
                 res.status(200).json({
                     message: "Successfully updated."
                 })
@@ -97,7 +97,7 @@ router.delete('/remove/:id', (req, res) => {
         }
     })
     .then(
-        function deleteSuccess(game) {
+        function deleteSuccess() {
             res.status(200).json({
                 message: "Successfully deleted"
             })
