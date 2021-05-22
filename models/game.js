@@ -1,3 +1,6 @@
+var DataTypes = require('sequelize');
+var sequelize = require('../db');
+
 module.exports = function(sequelize, DataTypes) {
     return sequelize.define('game', {
         title: {
@@ -35,4 +38,4 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
         }
     })
-}
+}(sequelize, DataTypes)

@@ -4,7 +4,7 @@ var Game = require('../models/game');
 router.get('/all', (req, res) => {
     Game.findAll({ where: { owner_id: req.user.id } })
         .then(
-            function findSuccess(data) {
+            function findSuccess(games) {
                 res.status(200).json({
                     games: games,
                     message: "Data fetched."
@@ -70,13 +70,12 @@ router.put('/update/:id', (req, res) => {
         {
             where: {
                 id: req.params.id,
-                owner_id: req.user
+                owner_id: req.user.id
             }
         })
         .then(
             function updateSuccess(game) {
                 res.status(200).json({
-                    game: game,
                     message: "Successfully updated."
                 })
             },
@@ -100,7 +99,6 @@ router.delete('/remove/:id', (req, res) => {
     .then(
         function deleteSuccess(game) {
             res.status(200).json({
-                game: game,
                 message: "Successfully deleted"
             })
         },
