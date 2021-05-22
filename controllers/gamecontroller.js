@@ -1,10 +1,10 @@
 var router = require('express').Router();
-var Game = require('../db').import('../models/game');
+var Game = require('../models/game');
 
 router.get('/all', (req, res) => {
     Game.findAll({ where: { owner_id: req.user.id } })
         .then(
-            function findSuccess(data) {
+            function findSuccess(games) {
                 res.status(200).json({
                     games: games,
                     message: "Data fetched."
@@ -28,7 +28,7 @@ router.get('/:id', (req, res) => {
                 })
             },
 
-            function findFail(err) {
+            function findFail() {
                 res.status(500).json({
                     message: "Data not found."
                 })
@@ -70,13 +70,12 @@ router.put('/update/:id', (req, res) => {
         {
             where: {
                 id: req.params.id,
-                owner_id: req.user
+                owner_id: req.user.id
             }
         })
         .then(
-            function updateSuccess(game) {
+            function updateSuccess() {
                 res.status(200).json({
-                    game: game,
                     message: "Successfully updated."
                 })
             },
@@ -98,9 +97,8 @@ router.delete('/remove/:id', (req, res) => {
         }
     })
     .then(
-        function deleteSuccess(game) {
+        function deleteSuccess() {
             res.status(200).json({
-                game: game,
                 message: "Successfully deleted"
             })
         },
@@ -113,4 +111,4 @@ router.delete('/remove/:id', (req, res) => {
     )
 })
 
-module.exports = routers;
+module.exports = router;

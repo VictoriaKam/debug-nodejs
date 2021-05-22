@@ -1,3 +1,6 @@
+var DataTypes = require('sequelize');
+var sequelize = require('../db');
+
 module.exports = function(sequelize, DataTypes) {
     return sequelize.define('user', {
         full_name: {
@@ -23,4 +26,4 @@ module.exports = function(sequelize, DataTypes) {
             }
         }
     })
-}
+}(sequelize, DataTypes)
